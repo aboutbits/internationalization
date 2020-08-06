@@ -1,4 +1,4 @@
-name: Publish Package
+name: Create Relase & Publish Package
 on:
   push:
     tags:
