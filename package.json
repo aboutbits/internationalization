@@ -1,0 +1,55 @@
+{
+  "name": "@aboutbits/internationalization",
+  "version": "0.1.0",
+  "description": "Internationalization",
+  "keywords": [
+    "internationalization",
+    "language",
+    "languages",
+    "browser detection"
+  ],
+  "author": "AboutBits",
+  "license": "MIT",
+  "private": false,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --ext js,ts,tsx src",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest --config jestconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "version": "npm run lint:fix && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aboutbits/internationalization.git"
+  },
+  "files": [
+    "readme.md",
+    "dist/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/aboutbits/internationalization/issues"
+  },
+  "homepage": "https://github.com/aboutbits/internationalization#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.9",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.2.2",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.4",
+    "typescript": "^3.9.7"
+  }
+}
