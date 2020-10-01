@@ -1,6 +1,8 @@
 Internationalization
 ====================
 
+[![Generic badge](https://img.shields.io/badge/npm-v0.1.3-blue.svg)](https://www.npmjs.com/package/@aboutbits/internationalization)
+
 This package includes utilities for working with different languages in the browser.
 
 ## Table of content
