@@ -1,6 +1,8 @@
 Internationalization
 ====================
 
+[![npm version](https://badge.fury.io/js/%40aboutbits%2Finternationalization.svg)](https://badge.fury.io/js/%40aboutbits%2Finternationalization)
+
 This package includes utilities for working with different languages in the browser.
 
 ## Table of content
