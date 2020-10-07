@@ -58,7 +58,7 @@ class ClientInternationalization<T extends string> {
    *
    * @param language { string } - Language to set
    */
-  saveLanguage(language: string): void {
+  setLanguage(language: string): void {
     if (canUseDOM()) {
       const cookieLanguage =
         this.supportedLanguages.find((lang) => lang === language) ||
