@@ -3,7 +3,8 @@ Internationalization
 
 [![npm version](https://badge.fury.io/js/%40aboutbits%2Finternationalization.svg)](https://badge.fury.io/js/%40aboutbits%2Finternationalization)
 
-This package includes utilities for working with different languages in the browser.
+This package includes utilities for working with different languages in the browser. 
+This package works for client side rendered applications as well as for server side rendered applications.
 
 ## Table of content
 
@@ -22,15 +23,26 @@ npm install @aboutbits/internationalization
 Second, you can setup the tool with all supported languages and the fallback language and then detect the given browser language.
 
 ```js
-import Internationalization from '@aboutbits/internationalization'
+import { Internationalization } from '@aboutbits/internationalization'
 
 let supportedLanguages = ['en', 'de', 'it']
 let fallbackLanguage = 'en'
 
 let i18n = new Internationalization(supportedLanguages, fallbackLanguage)
 
-let language = i18n.detectBrowserLanguage()
+// Fetches the language only from the user's browser
+let browserLanguage = i18n.detectBrowserLanguage()
 
+// First check the cookies to see if a language is set. If not it will look in the browser.
+// You can also pass a requiest obejct with which the language can be recognized already during the server side rendering
+let language = i18n.detectLanguage()
+
+// Sets a cookie with the specified language. 
+// There exists also a static version of this method. 
+// Ex. Internationalization.setLanguage("de")
+i18n.setLanguage("de")
+
+console.log(browserLanguage)
 console.log(language)
 ```
 
