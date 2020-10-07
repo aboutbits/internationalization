@@ -1,3 +1,4 @@
 import ClientInternationalization from './ClientInternationalization'
+import ServerInternationalization from './ServerInternationalization'
 
-export { ClientInternationalization }
+export { ClientInternationalization, ServerInternationalization }
