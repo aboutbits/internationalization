@@ -1,7 +1,7 @@
 import { getCookieFromDocument, canUseDOM, setCookie } from './utilities'
 
 class ClientInternationalization<T extends string> {
-  private readonly cookieName: string
+  protected readonly cookieName: string
 
   supportedLanguages: Array<T>
   fallbackLanguage: T
@@ -22,6 +22,7 @@ class ClientInternationalization<T extends string> {
   ) {
     this.supportedLanguages = supportedLanguages
     this.fallbackLanguage = fallbackLanguage
+
     this.cookieName = typeof cookieName === 'string' ? cookieName : 'language'
   }
 
@@ -53,11 +54,11 @@ class ClientInternationalization<T extends string> {
   /**
    * Save a language to a cookie
    * If the set language isn't in the list of supported languages
-   * the fallback fallback language is returned
+   * the fallback language will be returned
    *
    * @param language { string } - Language to set
    */
-  saveSetLanguage(language: string): void {
+  saveLanguage(language: string): void {
     if (canUseDOM()) {
       const cookieLanguage =
         this.supportedLanguages.find((lang) => lang === language) ||
@@ -68,11 +69,25 @@ class ClientInternationalization<T extends string> {
   }
 
   /**
+   * Save a language to a cookie
+   * This method will not check if the language you want to set is supported
+   * Please note! If you have changed the cookie name, you must change it here as well
+   *
+   * @param language { string } - Language to set
+   * @param cookieName { string } - Optional: Cookie name
+   */
+  static setLanguage(language: string, cookieName?: string): void {
+    if (canUseDOM()) {
+      cookieName = typeof cookieName === 'string' ? cookieName : 'language'
+
+      setCookie(cookieName, language)
+    }
+  }
+
+  /**
    * Get the current language
    * This method will first check if a language cookie is present.
    * If no cookie was found the method will get the language form the browser
-   *
-   * If no language was found, this method simply calls the detectBrowserLanguage method
    *
    * @return { string } - Found language or fallback language
    */
