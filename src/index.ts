@@ -73,22 +73,6 @@ class Internationalization<T extends string> {
   }
 
   /**
-   * Save a language to a cookie
-   * This method will not check if the language you want to set is supported
-   * Please note! If you have changed the cookie name, you must change it here as well
-   *
-   * @param language { string } - Language to set
-   * @param cookieName { string } - Optional: Cookie name
-   */
-  static setLanguage(language: string, cookieName?: string): void {
-    if (canUseDOM()) {
-      cookieName = typeof cookieName === 'string' ? cookieName : 'language'
-
-      setCookie(cookieName, language)
-    }
-  }
-
-  /**
    * Get the current language
    * This method will first check if a language cookie is present.
    * If no cookie was found the method will get the language form the browser
