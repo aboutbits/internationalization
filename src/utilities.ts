@@ -4,6 +4,8 @@
  *
  * @param name { string } - Filter keyword
  */
+import { IncomingMessage } from 'http'
+
 const getCookiePattern = (name: string): RegExp => RegExp(name + '=.[^;]*')
 
 /**
@@ -21,6 +23,23 @@ function getCookieFromDocument(name: string): string | undefined {
 
   const cookie = matched[0].split('=')
   return decodeURIComponent(cookie[1])
+}
+
+function getCookieFromRequest(
+  name: string,
+  request: IncomingMessage
+): string | undefined {
+  if (request.headers && request.headers.cookie) {
+    const pattern = getCookiePattern(name)
+    const matched = request.headers.cookie.match(pattern)
+
+    if (!matched) {
+      return undefined
+    }
+
+    const cookie = matched[0].split('=')
+    return decodeURIComponent(cookie[1])
+  }
 }
 
 /**
@@ -46,4 +65,4 @@ function canUseDOM(): boolean {
   )
 }
 
-export { getCookieFromDocument, setCookie, canUseDOM }
+export { getCookieFromDocument, getCookieFromRequest, setCookie, canUseDOM }
