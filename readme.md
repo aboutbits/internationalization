@@ -1,8 +1,8 @@
 Internationalization
 ====================
 
-[![npm version](https://badge.fury.io/js/%40aboutbits%2Finternationalization.svg)](https://badge.fury.io/js/%40aboutbits%2Finternationalization)
-[![GitHub license](https://img.shields.io/github/license/aboutbits/internationalization)](https://github.com/aboutbits/internationalization/blob/master/license.md)
+[![npm package](https://badge.fury.io/js/%40aboutbits%2Finternationalization.svg)](https://badge.fury.io/js/%40aboutbits%2Finternationalization)
+[![license](https://img.shields.io/github/license/aboutbits/internationalization)](https://github.com/aboutbits/internationalization/blob/master/license.md)
 
 This package includes utilities for working with different languages in the browser. 
 This package works for client side rendered applications as well as for server side rendered applications.
