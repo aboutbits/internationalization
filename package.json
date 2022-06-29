@@ -13,6 +13,10 @@
   "private": false,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "engines": {
+    "npm": "^8",
+    "node": "^16"
+  },
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext js,ts,tsx src",
