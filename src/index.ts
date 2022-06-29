@@ -113,9 +113,9 @@ class Internationalization<T extends string> {
           )
 
         // Check if the potential locale is not undefined else return the fallback language
-        return (potentialLocale
-          ? potentialLocale.locale
-          : this.fallbackLanguage) as T
+        return (
+          potentialLocale ? potentialLocale.locale : this.fallbackLanguage
+        ) as T
       }
     }
 
