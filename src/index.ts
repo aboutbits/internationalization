@@ -4,6 +4,7 @@ import {
   canUseDOM,
   setCookie,
   getCookieFromRequest,
+  isEqualCaseInsensitive,
 } from './utilities'
 
 class Internationalization<T extends string> {
@@ -46,8 +47,9 @@ class Internationalization<T extends string> {
         (navigator.languages && navigator.languages[0]) || navigator.language
 
       return (
-        this.supportedLanguages.find((lang) => lang === browserLanguage) ||
-        this.fallbackLanguage
+        this.supportedLanguages.find((lang) =>
+          isEqualCaseInsensitive(lang, browserLanguage)
+        ) || this.fallbackLanguage
       )
     }
 
@@ -65,8 +67,9 @@ class Internationalization<T extends string> {
   setLanguage(language: string): void {
     if (canUseDOM()) {
       const cookieLanguage =
-        this.supportedLanguages.find((lang) => lang === language) ||
-        this.fallbackLanguage
+        this.supportedLanguages.find((lang) =>
+          isEqualCaseInsensitive(lang, language)
+        ) || this.fallbackLanguage
 
       setCookie(this.cookieName, cookieLanguage)
     }
@@ -109,7 +112,9 @@ class Internationalization<T extends string> {
           .find(
             ({ locale }) =>
               locale !== '*' &&
-              this.supportedLanguages.some((lang) => locale === lang)
+              this.supportedLanguages.some((lang) =>
+                isEqualCaseInsensitive(locale, lang)
+              )
           )
 
         // Check if the potential locale is not undefined else return the fallback language
@@ -131,8 +136,9 @@ class Internationalization<T extends string> {
 
       // Return found language or fallback language
       return (
-        this.supportedLanguages.find((lang) => lang === language) ||
-        this.fallbackLanguage
+        this.supportedLanguages.find((lang) =>
+          isEqualCaseInsensitive(lang, language)
+        ) || this.fallbackLanguage
       )
     }
 

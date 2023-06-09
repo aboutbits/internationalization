@@ -65,4 +65,14 @@ function canUseDOM(): boolean {
   )
 }
 
-export { getCookieFromDocument, getCookieFromRequest, setCookie, canUseDOM }
+function isEqualCaseInsensitive(a: string, b: string): boolean {
+  return a.toLowerCase() === b.toLowerCase()
+}
+
+export {
+  getCookieFromDocument,
+  getCookieFromRequest,
+  setCookie,
+  canUseDOM,
+  isEqualCaseInsensitive,
+}
