@@ -8,3 +8,9 @@
 # Project
 /node_modules
 /dist
+
+# Build
+*.tsbuildinfo
+
+# ESLint
+.eslintcache

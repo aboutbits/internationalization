@@ -23,7 +23,7 @@ class Internationalization<T extends string> {
   constructor(
     supportedLanguages: Array<T>,
     fallbackLanguage: T,
-    cookieName?: string
+    cookieName?: string,
   ) {
     this.supportedLanguages = supportedLanguages
     this.fallbackLanguage = fallbackLanguage
@@ -48,7 +48,7 @@ class Internationalization<T extends string> {
 
       return (
         this.supportedLanguages.find((lang) =>
-          isEqualCaseInsensitive(lang, browserLanguage)
+          isEqualCaseInsensitive(lang, browserLanguage),
         ) || this.fallbackLanguage
       )
     }
@@ -68,7 +68,7 @@ class Internationalization<T extends string> {
     if (canUseDOM()) {
       const cookieLanguage =
         this.supportedLanguages.find((lang) =>
-          isEqualCaseInsensitive(lang, language)
+          isEqualCaseInsensitive(lang, language),
         ) || this.fallbackLanguage
 
       setCookie(this.cookieName, cookieLanguage)
@@ -113,8 +113,8 @@ class Internationalization<T extends string> {
             ({ locale }) =>
               locale !== '*' &&
               this.supportedLanguages.some((lang) =>
-                isEqualCaseInsensitive(locale, lang)
-              )
+                isEqualCaseInsensitive(locale, lang),
+              ),
           )
 
         // Check if the potential locale is not undefined else return the fallback language
@@ -137,7 +137,7 @@ class Internationalization<T extends string> {
       // Return found language or fallback language
       return (
         this.supportedLanguages.find((lang) =>
-          isEqualCaseInsensitive(lang, language)
+          isEqualCaseInsensitive(lang, language),
         ) || this.fallbackLanguage
       )
     }

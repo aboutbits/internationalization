@@ -27,7 +27,7 @@ function getCookieFromDocument(name: string): string | undefined {
 
 function getCookieFromRequest(
   name: string,
-  request: IncomingMessage
+  request: IncomingMessage,
 ): string | undefined {
   if (request.headers && request.headers.cookie) {
     const pattern = getCookiePattern(name)
