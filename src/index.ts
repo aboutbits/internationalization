@@ -16,7 +16,7 @@ class Internationalization<T extends string> {
   /**
    * ClientInternationalization utility package for working with languages
    *
-   * @param supportedLanguages { Array<string> } - List of all supported languages
+   * @param supportedLanguages { Array<string> } - List of all supported languages as two-letter codes (ISO 639-1)
    * @param fallbackLanguage { string } - Fallback language if no language matches
    * @param cookieName { string } - Optional: Set a preferred cookie name
    */
@@ -43,8 +43,13 @@ class Internationalization<T extends string> {
     // If the DOM isn't accessible the website may be rendered on a server
     if (canUseDOM()) {
       // Get browser language
-      const browserLanguage =
+      let browserLanguage =
         (navigator.languages && navigator.languages[0]) || navigator.language
+
+      // Check if the browser language is in the format of xx-XX, extract the first part
+      if (/^[a-zA-z]{2}\-/.test(browserLanguage)) {
+        browserLanguage = browserLanguage.substring(0, 2)
+      }
 
       return (
         this.supportedLanguages.find((lang) =>
