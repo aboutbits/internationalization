@@ -24,7 +24,7 @@ npm install @aboutbits/internationalization
 Second, you can setup the tool with all supported languages and the fallback language and then detect the given browser language.
 
 ```js
-import { Internationalization } from '@aboutbits/internationalization'
+import Internationalization from '@aboutbits/internationalization'
 
 let supportedLanguages = ['en', 'de', 'it']
 let fallbackLanguage = 'en'
