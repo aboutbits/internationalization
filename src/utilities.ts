@@ -29,7 +29,7 @@ function getCookieFromRequest(
   name: string,
   request: IncomingMessage,
 ): string | undefined {
-  if (request.headers?.cookie) {
+  if (request.headers.cookie) {
     const pattern = getCookiePattern(name)
     const matched = request.headers.cookie.match(pattern)
 
@@ -59,9 +59,8 @@ function setCookie(name: string, value: string): void {
  */
 function canUseDOM(): boolean {
   return Boolean(
-    typeof window !== 'undefined' &&
-      window.document &&
-      window.document.createElement,
+    // eslint-disable-next-line @typescript-eslint/unbound-method, @typescript-eslint/no-unnecessary-condition, @typescript-eslint/no-deprecated
+    typeof window !== 'undefined' && window.document?.createElement,
   )
 }
 
