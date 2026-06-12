@@ -1,16 +1,16 @@
 import { IncomingMessage } from 'http'
 import {
-  getCookieFromDocument,
   canUseDOM,
-  setCookie,
+  getCookieFromDocument,
   getCookieFromRequest,
   isEqualCaseInsensitive,
+  setCookie,
 } from './utilities'
 
 class Internationalization<T extends string> {
   private readonly cookieName: string
 
-  supportedLanguages: Array<T>
+  supportedLanguages: T[]
   fallbackLanguage: T
 
   /**
@@ -21,7 +21,7 @@ class Internationalization<T extends string> {
    * @param cookieName { string } - Optional: Set a preferred cookie name
    */
   constructor(
-    supportedLanguages: Array<T>,
+    supportedLanguages: T[],
     fallbackLanguage: T,
     cookieName?: string,
   ) {

@@ -29,7 +29,7 @@ function getCookieFromRequest(
   name: string,
   request: IncomingMessage,
 ): string | undefined {
-  if (request.headers && request.headers.cookie) {
+  if (request.headers?.cookie) {
     const pattern = getCookiePattern(name)
     const matched = request.headers.cookie.match(pattern)
 
@@ -58,10 +58,10 @@ function setCookie(name: string, value: string): void {
  * However, it might be pre-rendered for example on a server.
  */
 function canUseDOM(): boolean {
-  return !!(
-    typeof window != 'undefined' &&
-    window.document &&
-    window.document.createElement
+  return Boolean(
+    typeof window !== 'undefined' &&
+      window.document &&
+      window.document.createElement,
   )
 }
 
@@ -70,9 +70,9 @@ function isEqualCaseInsensitive(a: string, b: string): boolean {
 }
 
 export {
+  canUseDOM,
   getCookieFromDocument,
   getCookieFromRequest,
-  setCookie,
-  canUseDOM,
   isEqualCaseInsensitive,
+  setCookie,
 }
