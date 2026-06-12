@@ -1,16 +1,16 @@
 import { IncomingMessage } from 'http'
 import {
-  getCookieFromDocument,
   canUseDOM,
-  setCookie,
+  getCookieFromDocument,
   getCookieFromRequest,
   isEqualCaseInsensitive,
+  setCookie,
 } from './utilities'
 
 class Internationalization<T extends string> {
   private readonly cookieName: string
 
-  supportedLanguages: Array<T>
+  supportedLanguages: T[]
   fallbackLanguage: T
 
   /**
@@ -21,7 +21,7 @@ class Internationalization<T extends string> {
    * @param cookieName { string } - Optional: Set a preferred cookie name
    */
   constructor(
-    supportedLanguages: Array<T>,
+    supportedLanguages: T[],
     fallbackLanguage: T,
     cookieName?: string,
   ) {
@@ -43,18 +43,18 @@ class Internationalization<T extends string> {
     // If the DOM isn't accessible the website may be rendered on a server
     if (canUseDOM()) {
       // Get browser language
-      let browserLanguage =
-        (navigator.languages && navigator.languages[0]) || navigator.language
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      let browserLanguage = navigator.languages?.[0] || navigator.language
 
       // Check if the browser language is in the format of xx-XX, extract the first part
-      if (/^[a-zA-z]{2}\-/.test(browserLanguage)) {
+      if (/^[a-zA-z]{2}-/.test(browserLanguage)) {
         browserLanguage = browserLanguage.substring(0, 2)
       }
 
       return (
         this.supportedLanguages.find((lang) =>
           isEqualCaseInsensitive(lang, browserLanguage),
-        ) || this.fallbackLanguage
+        ) ?? this.fallbackLanguage
       )
     }
 
@@ -74,7 +74,7 @@ class Internationalization<T extends string> {
       const cookieLanguage =
         this.supportedLanguages.find((lang) =>
           isEqualCaseInsensitive(lang, language),
-        ) || this.fallbackLanguage
+        ) ?? this.fallbackLanguage
 
       setCookie(this.cookieName, cookieLanguage)
     }
@@ -103,7 +103,7 @@ class Internationalization<T extends string> {
       // Get accept language from request header
       const acceptLanguage = request.headers['accept-language']
 
-      if (acceptLanguage) {
+      if (acceptLanguage && typeof acceptLanguage === 'string') {
         // Extract the locale string and the priority from header string
         const requestedLocales = acceptLanguage.split(',').map((part) => {
           const [locale, priority] = part.trim().split(';q=')
@@ -135,7 +135,7 @@ class Internationalization<T extends string> {
       const language = getCookieFromDocument(this.cookieName)
 
       // If cookie is undefined get the language form the browser
-      if (language == undefined) {
+      if (language === undefined) {
         return this.detectBrowserLanguage()
       }
 
@@ -143,7 +143,7 @@ class Internationalization<T extends string> {
       return (
         this.supportedLanguages.find((lang) =>
           isEqualCaseInsensitive(lang, language),
-        ) || this.fallbackLanguage
+        ) ?? this.fallbackLanguage
       )
     }
 
